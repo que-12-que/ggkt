@@ -26,39 +26,39 @@ export default {
       method: 'get'
     })
   },
-    //修改课程信息
-    updateCourseInfoById(courseInfo) {
-      return request({
-        url: `${api_name}/update`,
-        method: 'post',
-        data: courseInfo
-      })
-    },
-    //获取发布课程信息  
-    getCoursePublishById(id) {
-      return request({
-        url: `${api_name}/getCoursePublishVo/${id}`,
-        method: 'get'
-      })
-    },
-    //发布课程  
-    publishCourseById(id) {
-      return request({
-        url: `${api_name}/publishCourse/${id}`,
-        method: 'put'
-      })
-    },
-    removeById(id) {
-      return request({
-        url: `${api_name}/remove/${id}`,
-        method: 'delete'
-      })
-    },
-    //查询所有课程
-    findAll() {
-      return request({
-        url: `${api_name}/findAll`,
-        method: 'get'
-      })
-    },
+  //修改课程信息
+  updateCourseInfoById(courseInfo) {
+    return request({
+      url: `${api_name}/update`,
+      method: 'post',
+      data: courseInfo
+    })
+  },
+  //获取发布课程信息  
+  getCoursePublishById(id) {
+    return request({
+      url: `${api_name}/getCoursePublishVo/${id}`,
+      method: 'get'
+    })
+  },
+  //发布课程  
+  publishCourseById(id) {
+    return request({
+      url: `${api_name}/publishCourse/${id}`,
+      method: 'put'
+    })
+  },
+  removeById(id) {
+    return request({
+      url: `${api_name}/remove/${id}`,
+      method: 'delete'
+    })
+  },
+  //查询所有课程
+  findAll() {
+    return request({
+      url: `${api_name}/findAll`,
+      method: 'get'
+    })
+  }
 }
