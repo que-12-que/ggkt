@@ -49,14 +49,16 @@ import vodApi from '@/api/vod/vod'
 export default {
   data() {
     return {
-      BASE_API: 'http://localhost:8301',
+      BASE_API: 'http://localhost:8333',
       dialogVisible: false,
       video: {
         sort: 0,
         free: false
       },
       fileList: [], // 上传文件列表
-      uploadBtnDisabled: false
+      uploadBtnDisabled: false,
+      // 用于修改上传视频后仍显示视频没上传的bug
+      isSuccess: false
     }
   },
   methods: {
@@ -93,14 +95,18 @@ export default {
       }
     },
     save() {
-      this.video.courseId = this.$parent.$parent.courseId
-      videoApi.save(this.video).then(response => {
-        this.$message.success(response.message)
-        // 关闭组件
-        this.close()
-        // 刷新列表
-        this.$parent.fetchNodeList()
-      })
+      // console.log('==================')
+      if(this.isSuccess) {
+        // console.log('成功保存==================')
+        this.video.courseId = this.$parent.$parent.courseId
+        videoApi.save(this.video).then(response => {
+          this.$message.success(response.message)
+          // 关闭组件
+          this.close()
+          // 刷新列表
+          this.$parent.fetchNodeList()
+        })
+      }      
     },
     update() {
       videoApi.updateById(this.video).then(response => {
@@ -122,9 +128,12 @@ export default {
     },
     // 视频上传成功的回调
     handleUploadSuccess(response, file, fileList) {
+      // console.log('上传成功=======================')
       this.uploadBtnDisabled = false
       this.video.videoSourceId = response.data
       this.video.videoOriginalName = file.name
+      // 用于修改上传视频后仍显示视频没上传的bug
+      this.isSuccess = true
     },
     // 失败回调
     handleUploadError() {
